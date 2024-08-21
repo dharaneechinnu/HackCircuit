@@ -98,7 +98,7 @@ const AnimatedText = styled.div`
   }
 
   @media (max-width: 480px) {
-    font-size: 2rem;
+    font-size: 2.5rem;
     letter-spacing: 0.1rem;
   }
 
