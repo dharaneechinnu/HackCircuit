@@ -10,11 +10,6 @@ const Sponsor = () => {
       <LogoGrid>
         <SponsorLogo className="large" src={dec} alt="Sponsor Logo" />
         <SponsorLogo className="small" src={kasi} alt="Sponsor Logo" />
-        <SponsorLogo className="medium" src={dec} alt="Sponsor Logo" />
-        <SponsorLogo className="large" src={kasi} alt="Sponsor Logo" />
-        <SponsorLogo className="small" src={dec} alt="Sponsor Logo" />
-        <SponsorLogo className="medium" src={kasi} alt="Sponsor Logo" />
-        {/* Add more SponsorLogo components as needed */}
       </LogoGrid>
     </SponsorContainer>
   );
@@ -28,9 +23,9 @@ const SponsorContainer = styled.div`
   justify-content: center;
   background-color: #121212; /* Dark background for better contrast */
   width: 100%;
+  min-height: 100vh; /* Ensure the height covers the viewport */
   max-width: 100%; /* Ensure the width doesn't exceed the screen */
   box-sizing: border-box; /* Include padding in the element's width and height */
-
 `;
 
 const SponsorHeading = styled.h2`
@@ -40,7 +35,11 @@ const SponsorHeading = styled.h2`
   letter-spacing: 0.5rem;
   color: #ffffff;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem; /* Increased margin for better spacing */
+
+  @media screen and (max-width: 1024px) {
+    font-size: 2.5rem;
+  }
 
   @media screen and (max-width: 768px) {
     font-size: 2rem;
@@ -59,17 +58,21 @@ const LogoGrid = styled.div`
   max-width: 900px;
   padding: 0 1rem;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1024px) {
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
   }
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 768px) {
     grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  }
+
+  @media screen and (max-width: 480px) {
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
   }
 `;
 
 const SponsorLogo = styled.img`
-  width: 90%;
+  width: 100%;
   height: auto;
   object-fit: contain;
   padding: 10px;
@@ -77,32 +80,34 @@ const SponsorLogo = styled.img`
 
   &.large {
     grid-column: span 2;
-    grid-row: span 2;
+
+    @media screen and (max-width: 1024px) {
+      grid-column: span 1.5;
+    }
 
     @media screen and (max-width: 768px) {
-      grid-column: span 1.5;
-      grid-row: span 1.5;
+      grid-column: span 1;
     }
 
     @media screen and (max-width: 480px) {
       grid-column: span 1;
-      grid-row: span 1;
     }
   }
 
   &.medium {
     grid-column: span 1.5;
-    grid-row: span 1.5;
+
+    @media screen and (max-width: 1024px) {
+      grid-column: span 1;
+    }
 
     @media screen and (max-width: 768px) {
       grid-column: span 1;
-      grid-row: span 1;
     }
   }
 
   &.small {
     grid-column: span 1;
-    grid-row: span 1;
   }
 `;
 

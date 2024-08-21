@@ -24,6 +24,7 @@ const Container = styled.div`
   overflow: hidden;
   color: #fff;
   text-align: center;
+  padding: 1rem;
 
   /* Adding a dark overlay */
   &::before {
@@ -69,7 +70,7 @@ const fadeInSlideUp = keyframes`
 
 // Styled component for the text with gradient and animation
 const AnimatedText = styled.div`
-  font-size: 8rem;
+  font-size: 6rem;
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0.5rem;
@@ -80,25 +81,30 @@ const AnimatedText = styled.div`
   border-radius: 10px;
   animation: ${fadeInSlideUp} 1s ease-out; /* Add the animation */
 
-  @media (max-width: 1024px) {
-    font-size: 6rem;
+  @media (max-width: 1200px) {
+    font-size: 5rem;
+    letter-spacing: 0.4rem;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     font-size: 4rem;
     letter-spacing: 0.3rem;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
     font-size: 3rem;
     letter-spacing: 0.2rem;
     word-spacing: 0.5rem;
   }
 
-  @media (max-width: 320px) {
-    font-size: 2.5rem;
+  @media (max-width: 480px) {
+    font-size: 2rem;
     letter-spacing: 0.1rem;
-    word-spacing: 0.3rem;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 1.5rem;
+    letter-spacing: 0.05rem;
   }
 `;
 
@@ -106,29 +112,34 @@ const AnimatedText = styled.div`
 const AnimatedDate = styled.div`
   font-family: "Wallpoet", sans-serif;
   font-weight: 400;
-  font-size: 4rem;
-  letter-spacing: 1rem;
+  font-size: 3rem;
+  letter-spacing: 0.8rem;
   font-style: normal;
-  animation: ${fadeInSlideUp} 3s ease-in-out; /* Add the animation with slight delay */
+  animation: ${fadeInSlideUp} 2s ease-in-out; /* Add the animation with slight delay */
+
+  @media (max-width: 1200px) {
+    font-size: 2.5rem;
+    letter-spacing: 0.6rem;
+  }
 
   @media (max-width: 1024px) {
-    font-size: 3rem;
-    letter-spacing: 0.8rem;
+    font-size: 2rem;
+    letter-spacing: 0.4rem;
   }
 
   @media (max-width: 768px) {
-    font-size: 2.5rem;
-    letter-spacing: 0.5rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 2rem;
+    font-size: 1.5rem;
     letter-spacing: 0.3rem;
   }
 
-  @media (max-width: 320px) {
-    font-size: 1.8rem;
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
     letter-spacing: 0.2rem;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
   }
 `;
 

@@ -45,6 +45,10 @@ const Container = styled.div`
     text-align: center;
     margin-bottom: 1rem;
 
+    @media screen and (max-width: 1024px) {
+      font-size: 2.5rem;
+    }
+
     @media screen and (max-width: 768px) {
       font-size: 2rem;
     }
@@ -67,6 +71,10 @@ const Container = styled.div`
       font-size: 1.5rem;
       text-align: justify;
       line-height: 1.6;
+
+      @media screen and (max-width: 1024px) {
+        font-size: 1.2rem;
+      }
 
       @media screen and (max-width: 768px) {
         font-size: 1rem;
@@ -98,14 +106,19 @@ const Container = styled.div`
         transform: scale(1.05);
       }
 
+      @media screen and (max-width: 1024px) {
+        font-size: 1.1rem;
+        padding: 10px 20px;
+      }
+
       @media screen and (max-width: 768px) {
         font-size: 1rem;
-        padding: 10px 20px;
+        padding: 8px 16px;
       }
 
       @media screen and (max-width: 480px) {
         font-size: 0.9rem;
-        padding: 8px 16px;
+        padding: 6px 12px;
       }
     }
   }
@@ -126,8 +139,16 @@ const Container = styled.div`
         transform: scale(1.2);
       }
 
-      @media screen and (max-width: 480px) {
+      @media screen and (max-width: 1024px) {
+        font-size: 1.8rem;
+      }
+
+      @media screen and (max-width: 768px) {
         font-size: 1.5rem;
+      }
+
+      @media screen and (max-width: 480px) {
+        font-size: 1.3rem;
         margin: 0 5px;
       }
     }

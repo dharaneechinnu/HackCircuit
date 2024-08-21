@@ -2,10 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import Main from '../Pages/Main';
 import About from '../Pages/About';
-import Contact from '../Pages/Contact';
 import Nav from '../Pages/Nav';
 import Sponsor from '../Pages/Sponsor';
 import Loading from '../Pages/Loading';
+import Event from '../Pages/Event';
 
 const Pages = () => {
   const [loading, setLoading] = useState(true);
@@ -29,7 +29,7 @@ const Pages = () => {
       <Main />
       <About />
       <Sponsor />
-      {/* <Contact /> */}
+      <Event/>
     </>
   );
 };

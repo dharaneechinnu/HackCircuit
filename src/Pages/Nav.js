@@ -64,7 +64,7 @@ const Nav = () => {
         <NavSection>
           <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
             <Logo>
-              <h2><span>HACKCIRCUIT</span></h2>
+              <h2 href="#home" onClick={handleLinkClick}><span>HACKCIRCUIT</span></h2>
             </Logo>
           </Link>
         </NavSection>
@@ -155,7 +155,7 @@ const ToggleButton = styled.button`
   color: white;
   font-size: 1rem;
   cursor: pointer;
-  margin-left: 10px;
+  margin-right: 30px;
 
   &:hover {
     text-decoration: none;
