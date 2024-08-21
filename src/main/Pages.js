@@ -6,6 +6,7 @@ import Nav from '../Pages/Nav';
 import Sponsor from '../Pages/Sponsor';
 import Loading from '../Pages/Loading';
 import Event from '../Pages/Event';
+import Footer from '../Pages/Footer';
 
 const Pages = () => {
   const [loading, setLoading] = useState(true);
@@ -30,6 +31,7 @@ const Pages = () => {
       <About />
       <Sponsor />
       <Event/>
+      <Footer/>
     </>
   );
 };
