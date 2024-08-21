@@ -8,8 +8,8 @@ const Sponsor = () => {
     <SponsorContainer id='spo'>
       <SponsorHeading>OUR SPONSORS</SponsorHeading>
       <LogoGrid>
-        <SponsorLogo className="large" src={dec} alt="Sponsor Logo" />
-        <SponsorLogo className="small" src={kasi} alt="Sponsor Logo" />
+        {/* <SponsorLogo className="large" src={dec} alt="Sponsor Logo" />
+        <SponsorLogo className="small" src={kasi} alt="Sponsor Logo" /> */}
       </LogoGrid>
     </SponsorContainer>
   );
