@@ -68,7 +68,17 @@ const Nav = () => {
             </Logo>
           </Link>
         </NavSection>
-        
+
+        {/* Full Navbar Links for Larger Screens */}
+        <NavbarLinks>
+          <NavbarLink href="#home" onClick={handleLinkClick}>Home</NavbarLink>
+          <NavbarLink href="#about" onClick={handleLinkClick}>About</NavbarLink>
+          <NavbarLink href="#spo" onClick={handleLinkClick}>Our Sponsor</NavbarLink>
+          <NavbarLink href="#team" onClick={handleLinkClick}>Our Team</NavbarLink>
+          <NavbarLink href="#contact" onClick={handleLinkClick}>Contact</NavbarLink>
+        </NavbarLinks>
+
+        {/* Toggle Button for Mobile Screens */}
         <ToggleButton onClick={toggleSidebar}>
           {isOpen ? (
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="Close--Streamline-Ultimate.svg" height="24" width="24">
@@ -90,6 +100,7 @@ const Nav = () => {
           <SidebarLink href="#home" onClick={handleLinkClick}>Home</SidebarLink>
           <SidebarLink href="#about" onClick={handleLinkClick}>About</SidebarLink>
           <SidebarLink href="#spo" onClick={handleLinkClick}>Our Sponsor</SidebarLink>
+          <SidebarLink href="#team" onClick={handleLinkClick}>Our Team</SidebarLink>
           <SidebarLink href="#contact" onClick={handleLinkClick}>Contact</SidebarLink>
         </SidebarContent>
       </Sidebar>
@@ -113,7 +124,6 @@ const Container = styled.div`
   z-index: 1000;
   transition: background 0.3s ease, box-shadow 0.3s ease;
 `;
-
 
 const MainContent = styled.main`
   width: 100vw;
@@ -149,6 +159,27 @@ const Logo = styled.h1`
   }
 `;
 
+const NavbarLinks = styled.div`
+  display: flex;
+  gap: 30px;
+  margin-right: 30px;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const NavbarLink = styled.a`
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 const ToggleButton = styled.button`
   background: none;
   border: none;
@@ -156,6 +187,11 @@ const ToggleButton = styled.button`
   font-size: 1rem;
   cursor: pointer;
   margin-right: 30px;
+  display: none;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
 
   &:hover {
     text-decoration: none;

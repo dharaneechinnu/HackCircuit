@@ -10,7 +10,7 @@ const Footer = () => {
         Designed by 
         <StyledLink href="https://linkedin.com/in/dharaneedharan1825" target="_blank" rel="noopener noreferrer"> Dharaneedharan </StyledLink>, 
         <StyledLink href="https://www.linkedin.com/in/rahul-srinivas-s-9b6a0027b/" target="_blank" rel="noopener noreferrer"> Rahul Srinivas </StyledLink>, and 
-        <StyledLink href="https://www.linkedin.com/in/arunprasaddesigner/" target="_blank" rel="noopener noreferrer"> Arun Prasad </StyledLink>
+        <StyledLink href="https://www.linkedin.com/in/arunprasaddesigner/" target="_blank" rel="noopener noreferrer">Arun Prasad</StyledLink>
       </FooterItem>
       <FooterItem className="right">
         <a href="https://www.instagram.com" className='int' target="_blank" rel="noopener noreferrer">

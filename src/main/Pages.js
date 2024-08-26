@@ -1,5 +1,5 @@
-// src/Pages/Pages.js
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import Main from '../Pages/Main';
 import About from '../Pages/About';
 import Nav from '../Pages/Nav';
@@ -7,6 +7,19 @@ import Sponsor from '../Pages/Sponsor';
 import Loading from '../Pages/Loading';
 import Event from '../Pages/Event';
 import Footer from '../Pages/Footer';
+import Team from '../Pages/Team';
+
+// Styled container to make the page fit the viewport
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+// Content section that grows to fill available space
+const Content = styled.div`
+  flex: 1;
+`;
 
 const Pages = () => {
   const [loading, setLoading] = useState(true);
@@ -25,14 +38,17 @@ const Pages = () => {
   }
 
   return (
-    <>
+    <Container>
       <Nav />
-      <Main />
-      <About />
-      <Sponsor />
-      <Event/>
-      <Footer/>
-    </>
+      <Content>
+        <Main />
+        <About />
+        <Sponsor />
+        <Event />
+      </Content>
+      <Team/>
+      <Footer />
+    </Container>
   );
 };
 

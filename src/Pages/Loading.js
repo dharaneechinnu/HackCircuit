@@ -52,7 +52,6 @@ const Text = styled.div`
   font-weight: 400;
   color: black;
   font-size: 4rem;
-  letter-spacing: 1rem;
   animation: ${pulse} 2s infinite; /* Add pulsing animation */
   text-align: center; /* Center text horizontally */
   
