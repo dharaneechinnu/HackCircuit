@@ -1,10 +1,51 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { FaInstagram } from "react-icons/fa";
+import Lenis from '@studio-freight/lenis'; // Import Lenis for smooth scrolling
 
 const About = () => {
+  const aboutRef = useRef(null); // Create a ref for the About section
+
+  useEffect(() => {
+    // Initialize Lenis for smooth scrolling
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
+
+    const animateScroll = (time) => {
+      lenis.raf(time);
+      requestAnimationFrame(animateScroll);
+    };
+
+    requestAnimationFrame(animateScroll);
+
+    // Set up IntersectionObserver for scroll animations
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Add animation class when the section is in view
+            entry.target.classList.add('animate-slide-right');
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    // Observe the About section
+    if (aboutRef.current) {
+      observer.observe(aboutRef.current);
+    }
+
+    return () => {
+      lenis.destroy();
+      observer.disconnect();
+    };
+  }, []);
+
   return (
-    <Container id='about'>
+    <Container ref={aboutRef} id='about'>
       <div className="title">
         ABOUT HACKCIRCUIT
       </div>
@@ -14,7 +55,7 @@ const About = () => {
         </p>
       </div>
       <div className="button">
-        <a href="#">Register</a>
+        <a href="https://forms.gle/epvW328ZfiNSPByj6">Register</a>
       </div>
       <div className="social-media">
         <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
@@ -33,9 +74,17 @@ const Container = styled.div`
   justify-content: center;
   background-color: #121212; /* Dark background for better contrast */
   width: 100%;
-  max-width: 100%; /* Ensure the width doesn't exceed the screen */
-  box-sizing: border-box; /* Include padding in the element's width and height */
-  
+  max-width: 100%;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateX(100px); /* Start off-screen to the right */
+  transition: all 0.8s ease-out; /* Smooth transition */
+
+  &.animate-slide-right {
+    opacity: 1;
+    transform: translateX(0); /* Slide in to its original position */
+  }
+
   .title {
     font-size: 3rem;
     font-family: "Wallpoet";
@@ -94,7 +143,7 @@ const Container = styled.div`
     a {
       display: inline-block;
       padding: 12px 24px;
-      background-color: #0066cc; /* Blue background for the button */
+      background-color: #0066cc;
       color: #ffffff;
       text-decoration: none;
       font-size: 1.2rem;
@@ -136,7 +185,7 @@ const Container = styled.div`
       font-size: 2rem;
 
       &:hover {
-        color: #e1306c; /* Instagram brand color */
+        color: #e1306c;
         transform: scale(1.2);
       }
 

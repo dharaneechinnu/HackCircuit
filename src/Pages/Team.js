@@ -7,7 +7,7 @@ import bg from '../Assets/bg6.png'; // Replace with the correct image paths
 const Team = () => {
   return (
     <>
-      <Nav />
+    
       <TeamContainer id="team">
         <MainTitle>OUR TEAM</MainTitle>
 
@@ -83,16 +83,20 @@ const Team = () => {
 
 const TeamContainer = styled.div`
   display: flex;
+  width: 100vw;
+  min-height: 100vh;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  box-sizing: border-box;
+  background-color: #121212;
 `;
 
 const MainTitle = styled.h1`
   color: #fff;
   font-family: 'Wallpoet';
   font-weight: 400;
-  font-size: 3rem;
+  font-size: clamp(2.5rem, 5vw, 3rem);
   margin-bottom: 2rem;
   text-align: center;
   text-transform: uppercase;
@@ -107,26 +111,22 @@ const SectionTitle = styled.h2`
   color: #fff;
   font-family: 'Wallpoet';
   font-weight: 400;
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
   margin-bottom: 1.5rem;
   text-align: center;
   text-transform: uppercase;
-
-  @media (min-width: 768px) {
-    font-size: 2.5rem;
-  }
 `;
 
 const MembersContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* Center the cards horizontally */
+  justify-content: center;
   gap: 20px;
   width: 100%;
 `;
 
 const MemberCard = styled.div`
-  width: calc(100% / 1 - 20px);
+  width: 100%;
   max-width: 300px;
   text-align: center;
   padding: 10px;
@@ -148,20 +148,19 @@ const MemberPhoto = styled.img`
   height: 200px;
   object-fit: cover;
   border-radius: 10px;
-  display: block;
-  margin: 0 auto;
 `;
 
 const MemberName = styled.h3`
   color: #fff;
-  margin: 0 0 5px;
-  font-size: 1.2rem;
+  margin: 10px 0 5px;
+  font-size: clamp(1rem, 2vw, 1.2rem);
   font-weight: bold;
 `;
 
 const MemberPosition = styled.p`
   margin: 5px 0 10px;
-  color: #555;
+  color: #aaa;
+  font-size: clamp(0.9rem, 1.8vw, 1rem);
 `;
 
 const LinkedInIcon = styled.a`
