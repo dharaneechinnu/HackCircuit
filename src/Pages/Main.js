@@ -116,7 +116,7 @@ const AnimatedText = styled.div`
   }
 
   @media (max-width: 480px) {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 
   @media (max-width: 320px) {
@@ -151,6 +151,7 @@ const AnimatedCode = styled.div`
   text-transform: uppercase;
   font-size: 3rem;
   letter-spacing: 1rem;
+  animation: ${fadeInSlideUp} 2s ease-in-out;
   font-style: normal;
   margin: 1rem 0; /* Adds spacing between the title and code */
 
@@ -165,7 +166,7 @@ const AnimatedCode = styled.div`
   }
 
   @media (max-width: 480px) {
-    font-size: 1.5rem;
+    font-size: 1rem;
     letter-spacing: 0.5rem;
   }
 

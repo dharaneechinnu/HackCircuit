@@ -1,34 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import Lenis from '@studio-freight/lenis'; // Import Lenis for smooth scrolling
 import { IoLocation } from "react-icons/io5";
 import { IoIosTime } from "react-icons/io";
 
 const Event = () => {
   const instructionRef = useRef(null);
   const ruleRef = useRef(null);
+  const domainRefs = useRef([]);
 
   useEffect(() => {
-    // Initialize Lenis for smooth scrolling
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    });
-
-    const animateScroll = (time) => {
-      lenis.raf(time);
-      requestAnimationFrame(animateScroll);
-    };
-
-    requestAnimationFrame(animateScroll);
-
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
-
-  useEffect(() => {
-    // Add scroll animation from right to left on elements
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -37,11 +17,19 @@ const Event = () => {
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0 }
     );
 
-    if (instructionRef.current) observer.observe(instructionRef.current);
-    if (ruleRef.current) observer.observe(ruleRef.current);
+    // Observe elements for scroll animation
+    [instructionRef, ruleRef].forEach(ref => {
+      if (ref.current) observer.observe(ref.current);
+    });
+    domainRefs.current.forEach(ref => {
+      if (ref) observer.observe(ref);
+    });
+
+    // Clean up the observer on component unmount
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -74,9 +62,14 @@ const Event = () => {
         </DetailItem>
       </EventDetails>
       <DomainContainer>
-        <DomainBox>Cybersecurity</DomainBox>
-        <DomainBox>Web Development</DomainBox>
-        <DomainBox>Artificial Intelligence</DomainBox>
+        {['Cybersecurity', 'Web Development', 'Artificial Intelligence'].map((domain, index) => (
+          <DomainBox 
+            key={index} 
+            ref={(el) => (domainRefs.current[index] = el)} // Assign refs to each DomainBox
+          >
+            {domain}
+          </DomainBox>
+        ))}
       </DomainContainer>
 
       {/* Instruction and Rules Boxes */}
@@ -102,6 +95,17 @@ const Event = () => {
   );
 };
 
+// Styled-components for Location and Time without animation
+const Location = styled.div`
+ font-size: 1rem;
+ font-weight: 500;
+`;
+
+const Time = styled.div`
+  font-size: 1rem;
+  font-weight: 500;
+`;
+
 // Styled-components for styling the Event component
 const EventContainer = styled.div`
   padding: 2rem;
@@ -114,11 +118,6 @@ const EventContainer = styled.div`
   justify-content: center;
   margin-bottom: 3rem;
 
-  @media (max-width: 1024px) {
-    max-width: 90%;
-    padding: 1.5rem;
-  }
-
   @media (max-width: 768px) {
     padding: 1.5rem;
     max-width: 95%;
@@ -126,7 +125,6 @@ const EventContainer = styled.div`
 
   @media (max-width: 480px) {
     padding: 1rem;
-    max-width: 100%;
   }
 `;
 
@@ -137,57 +135,38 @@ const EventTitle = styled.h1`
   letter-spacing: 0.5rem;
   color: #ffffff;
   text-align: center;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-
-  @media (max-width: 1024px) {
-    font-size: 2rem;
-    letter-spacing: 0.4rem;
-  }
+  margin: 1rem 0;
 
   @media (max-width: 768px) {
-    font-size: 1.8rem;
+    font-size: 2rem;
     letter-spacing: 0.3rem;
   }
 
   @media (max-width: 480px) {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     letter-spacing: 0.2rem;
   }
 `;
 
 const EventDescription = styled.div`
-   font-family: "Merienda", cursive;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  width: 60%;
+  font-family: "Merienda", cursive;
+  width: 80%;
+  max-width: 700px;
   text-align: justify;
   line-height: 1.6;
   color: #e0e0e0;
 
   p {
-
     margin-bottom: 1rem;
-  }
-
-  @media (max-width: 1024px) {
-    width: 75%;
-    font-size: 1.1rem;
   }
 
   @media (max-width: 768px) {
     font-size: 1rem;
-    width: 85%;
+    width: 90%;
   }
 
   @media (max-width: 480px) {
     font-size: 0.9rem;
-    width: 90%;
-  }
-
-  @media (max-width: 320px) {
-    font-size: 0.85rem;
     width: 95%;
   }
 `;
@@ -195,20 +174,14 @@ const EventDescription = styled.div`
 const EventDetails = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 60%;
+  width: 80%;
+  max-width: 700px;
   margin-top: 1rem;
-  font-family: "Merienda", cursive;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+  flex-wrap: wrap;
+
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
-    width: 80%;
-  }
-
-  @media (max-width: 480px) {
-    width: 90%;
   }
 `;
 
@@ -218,8 +191,8 @@ const DetailItem = styled.div`
   padding: 1rem;
   color: #000000;
   border-radius: 8px;
-  width: 100%;
-  
+  width: calc(50% - 1rem);
+  background-color: #fff;
   margin: 0.5rem;
 
   .icon {
@@ -228,22 +201,12 @@ const DetailItem = styled.div`
   }
 
   @media (max-width: 768px) {
-    font-size: 0.9rem;
+    width: 100%;
   }
 
   @media (max-width: 480px) {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
-`;
-
-const Location = styled(DetailItem)`
-  background-color: #ffff;
-  padding: 1rem;
-`;
-
-const Time = styled(DetailItem)`
-  background-color: #fff;
-  padding: 1rem;
 `;
 
 const DomainContainer = styled.div`
@@ -267,9 +230,6 @@ const DomainBox = styled.button`
   background-color: #1f1f1f;
   color: #ffffff;
   font-family: "Merienda", cursive;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease;
 
@@ -278,13 +238,7 @@ const DomainBox = styled.button`
     background-color: #303030;
   }
 
-  @media (max-width: 1024px) {
-    padding: 0.9rem 1.8rem;
-  }
-
   @media (max-width: 768px) {
-    width: 80%;
-    text-align: center;
     padding: 0.8rem 1.5rem;
   }
 
@@ -292,14 +246,12 @@ const DomainBox = styled.button`
     padding: 0.7rem 1.2rem;
     font-size: 0.9rem;
   }
-
-  @media (max-width: 320px) {
-    padding: 0.6rem 1rem;
-    font-size: 0.8rem;
-  }
 `;
+
+// Styled-components for InstructionBox and RuleBox with fade-up animation
 const InstructionBox = styled.div`
-  width: 60%;
+  width: 80%;
+  max-width: 700px;
   padding: 1rem;
   margin-top: 2rem;
   background-color: #2d2d2d;
@@ -307,15 +259,13 @@ const InstructionBox = styled.div`
   color: #fff;
   text-align: justify;
   opacity: 0;
-  transform: translateX(100px);
+  transform: translateY(30px);
   transition: all 0.6s ease-out;
   font-family: "Merienda", cursive;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+
   &.slide-in {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 
   h3 {
@@ -328,20 +278,13 @@ const InstructionBox = styled.div`
     margin-left: 1.5rem;
   }
 
-  @media (max-width: 768px) {
-    width: 80%;
-  }
-
   @media (max-width: 480px) {
-    width: 90%;
+    width: 95%;
   }
 `;
 
+// Reusing InstructionBox styles for RuleBox
 const RuleBox = styled(InstructionBox)`
- font-family: "Merienda", cursive;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
   margin-top: 1rem;
 `;
 
