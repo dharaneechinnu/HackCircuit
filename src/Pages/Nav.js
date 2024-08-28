@@ -75,7 +75,7 @@ const Nav = () => {
           <NavbarLink href="#about" onClick={handleLinkClick}>About</NavbarLink>
           <NavbarLink href="#spo" onClick={handleLinkClick}>Our Sponsor</NavbarLink>
           <NavbarLink href="#team" onClick={handleLinkClick}>Our Team</NavbarLink>
-          <NavbarLink href="#contact" onClick={handleLinkClick}>Contact</NavbarLink>
+         
         </NavbarLinks>
 
         {/* Toggle Button for Mobile Screens */}
@@ -101,7 +101,7 @@ const Nav = () => {
           <SidebarLink href="#about" onClick={handleLinkClick}>About</SidebarLink>
           <SidebarLink href="#spo" onClick={handleLinkClick}>Our Sponsor</SidebarLink>
           <SidebarLink href="#team" onClick={handleLinkClick}>Our Team</SidebarLink>
-          <SidebarLink href="#contact" onClick={handleLinkClick}>Contact</SidebarLink>
+        
         </SidebarContent>
       </Sidebar>
     </Container>

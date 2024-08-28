@@ -10,7 +10,7 @@ const About = () => {
       </div>
       <div className="para">
         <p>
-          The Department of Information Technology is excited to announce HackCircuit'24, an inter-college hackathon focused on the cutting-edge domains of Cybersecurity, Web Development, and Artificial Intelligence (AI). This event offers a series of challenges across Technical, Non-technical, and On-the-spot categories, pushing participants to innovate and excel.
+          The Department of Information Technology is excited to announce HackCircuit'24, an inter-college hackathon focused on the cutting-edge domains of Cybersecurity, Web Development, and Artificial Intelligence (AI). This event offers a series of challenges across Technical pushing participants to innovate.
         </p>
       </div>
       <div className="button">
@@ -44,6 +44,7 @@ const Container = styled.div`
     color: #ffffff;
     text-align: center;
     margin-bottom: 1rem;
+    margin-top: 2rem;
 
     @media screen and (max-width: 1024px) {
       font-size: 2.5rem;

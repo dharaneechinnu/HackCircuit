@@ -30,7 +30,7 @@ const FooterContainer = styled.footer`
   background-color: #333;
   color: #e0e0e0;
   font-size: 0.8rem;
-  width: 98vw;
+  width: 100vw;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
 
   @media screen and (max-width: 1024px) {

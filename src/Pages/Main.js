@@ -1,13 +1,42 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
+import Lenis from '@studio-freight/lenis'; // Ensure Lenis is installed
 import intro from '../Assets/bg6.png'; // Ensure the path is correct
 
 const Main = () => {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    // Initialize Lenis for smooth scrolling
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing function
+      smoothWheel: true,
+    });
+
+    // Start Lenis scroll loop
+    const raf = (time) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy(); // Clean up on unmount
+    };
+  }, []);
+
   return (
-    <Container id='home'>
+    <Container id='home' ref={containerRef}>
       <BackgroundImage src={intro} alt="Bg" />
       <div className="title">
-        <AnimatedText>HACKCIRCUIT</AnimatedText>
+        <AnimatedText>
+          {'HACKCIRCUIT'.split('').map((letter, index) => (
+            <Letter key={index} delay={index * 0.1}>
+              {letter}
+            </Letter>
+          ))}
+        </AnimatedText>
         <AnimatedDate>AUGUST 30</AnimatedDate>
       </div>
     </Container>
@@ -26,7 +55,6 @@ const Container = styled.div`
   text-align: center;
   padding: 1rem;
 
-  /* Adding a dark overlay */
   &::before {
     content: "";
     position: absolute;
@@ -34,7 +62,7 @@ const Container = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
     z-index: 0; /* Keep the overlay behind the text */
   }
 
@@ -47,8 +75,8 @@ const Container = styled.div`
 
 const BackgroundImage = styled.img`
   position: absolute;
-  top: 0; 
-  left: 0; 
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -68,78 +96,59 @@ const fadeInSlideUp = keyframes`
   }
 `;
 
-// Styled component for the text with gradient and animation
+// Styled component for the text
 const AnimatedText = styled.div`
-  font-size: 6rem;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0.5rem;
-  word-spacing: 1rem;
-  color: white;
+  font-size: 10rem;
+  display: flex;
+  justify-content: center;
   font-family: "Wallpoet", sans-serif;
   padding: 20px;
   border-radius: 10px;
-  animation: ${fadeInSlideUp} 1s ease-out; /* Add the animation */
-
-  @media (max-width: 1200px) {
-    font-size: 5rem;
-    letter-spacing: 0.4rem;
-  }
-
-  @media (max-width: 1024px) {
-    font-size: 4rem;
-    letter-spacing: 0.3rem;
-  }
-
   @media (max-width: 768px) {
-    font-size: 3rem;
-    letter-spacing: 0.2rem;
-    word-spacing: 0.5rem;
+    font-size: 6rem;
   }
 
   @media (max-width: 480px) {
-    font-size: 2.5rem;
-    letter-spacing: 0.1rem;
-  }
-
-  @media (max-width: 320px) {
-    font-size: 1.5rem;
-    letter-spacing: 0.05rem;
+    font-size: 3rem;
   }
 `;
 
-// Styled component for the date text with animation
+// Keyframes for individual letter animation
+const letterAnimation = keyframes`
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
+
+// Individual letter component with animation
+const Letter = styled.span`
+  display: inline-block;
+  animation: ${letterAnimation} 0.5s forwards;
+  animation-delay: ${({ delay }) => delay}s;
+  opacity: 0;
+  color: white;
+`;
+
+// Styled component for the date text
 const AnimatedDate = styled.div`
   font-family: "Wallpoet", sans-serif;
   font-weight: 400;
   font-size: 3rem;
   letter-spacing: 0.8rem;
   font-style: normal;
-  animation: ${fadeInSlideUp} 2s ease-in-out; /* Add the animation with slight delay */
-
-  @media (max-width: 1200px) {
-    font-size: 2.5rem;
-    letter-spacing: 0.6rem;
-  }
-
-  @media (max-width: 1024px) {
-    font-size: 2rem;
-    letter-spacing: 0.4rem;
-  }
+  animation: ${fadeInSlideUp} 2s ease-in-out; /* Add the animation with a slight delay */
 
   @media (max-width: 768px) {
-    font-size: 1.5rem;
-    letter-spacing: 0.3rem;
+    font-size: 2rem;
   }
 
   @media (max-width: 480px) {
-    font-size: 1.2rem;
-    letter-spacing: 0.2rem;
-  }
-
-  @media (max-width: 320px) {
-    font-size: 1rem;
-    letter-spacing: 0.1rem;
+    font-size: 1.5rem;
   }
 `;
 

@@ -4,8 +4,8 @@ import styled, { keyframes } from 'styled-components';
 const Loading = () => {
   return (
     <Container>
-      <Text>HC</Text>
       <TextWrapper>
+        <Text>HC</Text>
         <Title>HACKCIRCUIT</Title>
       </TextWrapper>
     </Container>
@@ -35,7 +35,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh; /* Full viewport height */
-  background-color: #121212; /* Dark background for contrast */
+  background-color: black; /* Dark background for contrast */
   overflow: hidden;
 `;
 
@@ -47,10 +47,10 @@ const Text = styled.div`
   align-items: center;
   width: 150px; /* Set a fixed width */
   height: 150px; /* Set a fixed height equal to width for a perfect circle */
-  background-color: #ffff; /* White background */
-  border-radius: 50%;
+  background-color: #ffffff; /* White background */
+  border-radius: 50%; /* Circle shape */
   font-weight: 400;
-  color: black;
+  color: black; /* Black text color */
   font-size: 4rem;
   animation: ${pulse} 2s infinite; /* Add pulsing animation */
   text-align: center; /* Center text horizontally */
@@ -59,28 +59,24 @@ const Text = styled.div`
     width: 120px; /* Adjust size for smaller screens */
     height: 120px;
     font-size: 3rem;
-    letter-spacing: 0.8rem;
   }
 
   @media (max-width: 768px) {
     width: 100px;
     height: 100px;
     font-size: 2.5rem;
-    letter-spacing: 0.6rem;
   }
 
   @media (max-width: 480px) {
     width: 80px;
     height: 80px;
     font-size: 2rem;
-    letter-spacing: 0.4rem;
   }
 
   @media (max-width: 320px) {
     width: 70px;
     height: 70px;
     font-size: 1.8rem;
-    letter-spacing: 0.3rem;
   }
 `;
 
@@ -97,9 +93,10 @@ const Title = styled.div`
   font-family: "Wallpoet", sans-serif;
   font-weight: 400;
   font-size: 3rem;
-  color: #fff;
+  color: #fff; /* White text color */
   letter-spacing: 0.8rem;
   margin-top: 10px; /* Space between HC and HACKCIRCUIT */
+  text-align: center;
 
   @media (max-width: 768px) {
     font-size: 2.5rem;
