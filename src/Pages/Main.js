@@ -37,6 +37,7 @@ const Main = () => {
             </Letter>
           ))}
         </AnimatedText>
+        <AnimatedCode>Hack.code.build</AnimatedCode>
         <AnimatedDate>AUGUST 30</AnimatedDate>
       </div>
     </Container>
@@ -69,6 +70,8 @@ const Container = styled.div`
   .title {
     display: flex;
     flex-direction: column;
+    align-items: center; /* Center align all text */
+    text-shadow: 0 0 7px #0d7c66, 0 0 10px #0d7c66;
     z-index: 1; /* Ensure text is above the background image and overlay */
   }
 `;
@@ -96,20 +99,28 @@ const fadeInSlideUp = keyframes`
   }
 `;
 
-// Styled component for the text
+// Styled component for the animated text
 const AnimatedText = styled.div`
-  font-size: 10rem;
+  font-size: 8rem;
   display: flex;
   justify-content: center;
   font-family: "Wallpoet", sans-serif;
   padding: 20px;
-  border-radius: 10px;
-  @media (max-width: 768px) {
+  margin-top: 1rem;
+  @media (max-width: 1024px) {
     font-size: 6rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 4.5rem;
   }
 
   @media (max-width: 480px) {
     font-size: 3rem;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 2.5rem;
   }
 `;
 
@@ -134,21 +145,64 @@ const Letter = styled.span`
   color: white;
 `;
 
+const AnimatedCode = styled.div`
+  font-family: "Wallpoet", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 3rem;
+  letter-spacing: 1rem;
+  font-style: normal;
+  margin: 1rem 0; /* Adds spacing between the title and code */
+
+  @media (max-width: 1024px) {
+    font-size: 2.5rem;
+    letter-spacing: 0.8rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    letter-spacing: 0.6rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+    letter-spacing: 0.5rem;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 1.2rem;
+    letter-spacing: 0.4rem;
+  }
+`;
+
 // Styled component for the date text
 const AnimatedDate = styled.div`
   font-family: "Wallpoet", sans-serif;
   font-weight: 400;
   font-size: 3rem;
-  letter-spacing: 0.8rem;
+  letter-spacing: 0.3rem;
   font-style: normal;
-  animation: ${fadeInSlideUp} 2s ease-in-out; /* Add the animation with a slight delay */
+  animation: ${fadeInSlideUp} 2s ease-in-out;
+  margin-top: 1rem; /* Adds space above the date */
+
+  @media (max-width: 1024px) {
+    font-size: 2.5rem;
+    letter-spacing: 0.25rem;
+  }
 
   @media (max-width: 768px) {
     font-size: 2rem;
+    letter-spacing: 0.2rem;
   }
 
   @media (max-width: 480px) {
     font-size: 1.5rem;
+    letter-spacing: 0.15rem;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 1.2rem;
+    letter-spacing: 0.1rem;
   }
 `;
 

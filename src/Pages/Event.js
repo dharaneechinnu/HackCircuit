@@ -157,13 +157,17 @@ const EventTitle = styled.h1`
 `;
 
 const EventDescription = styled.div`
-  font-size: 1.2rem;
+   font-family: "Merienda", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
   width: 60%;
   text-align: justify;
   line-height: 1.6;
   color: #e0e0e0;
 
   p {
+
     margin-bottom: 1rem;
   }
 
@@ -193,7 +197,10 @@ const EventDetails = styled.div`
   justify-content: space-between;
   width: 60%;
   margin-top: 1rem;
-
+  font-family: "Merienda", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
@@ -259,7 +266,10 @@ const DomainBox = styled.button`
   border-radius: 8px;
   background-color: #1f1f1f;
   color: #ffffff;
-  font-size: 1rem;
+  font-family: "Merienda", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease;
 
@@ -299,7 +309,10 @@ const InstructionBox = styled.div`
   opacity: 0;
   transform: translateX(100px);
   transition: all 0.6s ease-out;
-
+  font-family: "Merienda", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
   &.slide-in {
     opacity: 1;
     transform: translateX(0);
@@ -325,6 +338,10 @@ const InstructionBox = styled.div`
 `;
 
 const RuleBox = styled(InstructionBox)`
+ font-family: "Merienda", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
   margin-top: 1rem;
 `;
 

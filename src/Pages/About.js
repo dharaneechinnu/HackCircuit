@@ -111,6 +111,10 @@ const Container = styled.div`
   .para {
     color: #e0e0e0;
     width: 90%;
+    font-family: "Merienda", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
     max-width: 900px;
     margin: 1rem auto;
     padding: 1rem;
