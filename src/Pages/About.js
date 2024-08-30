@@ -1,23 +1,55 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { FaInstagram } from "react-icons/fa";
+import { FaInstagram } from 'react-icons/fa';
 
 const About = () => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('fade-up');
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <Container id='about'>
-      <div className="title">
-        ABOUT HACKCIRCUIT
-      </div>
+    <Container id="about" ref={sectionRef}>
+      <div className="title">ABOUT HACKCIRCUIT</div>
       <div className="para">
         <p>
-          The Department of Information Technology is excited to announce HackCircuit'24, an inter-college hackathon focused on the cutting-edge domains of Cybersecurity, Web Development, and Artificial Intelligence (AI). This event offers a series of challenges across Technical, Non-technical, and On-the-spot categories, pushing participants to innovate and excel.
+          The Department of Information Technology is excited to announce
+          HackCircuit'24, an inter-college hackathon focused on the
+          cutting-edge domains of Cybersecurity, Web Development, and
+          Artificial Intelligence (AI). This event offers a series of
+          challenges across Technical, Non-technical, and On-the-spot
+          categories, pushing participants to innovate and excel.
         </p>
       </div>
       <div className="button">
         <a href="https://forms.gle/epvW328ZfiNSPByj6">Register</a>
       </div>
       <div className="social-media">
-        <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://www.instagram.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <FaInstagram size={30} />
         </a>
       </div>
@@ -31,14 +63,22 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #121212; /* Dark background for better contrast */
+  background-color: #121212;
   width: 100%;
-  max-width: 100%; /* Ensure the width doesn't exceed the screen */
-  box-sizing: border-box; /* Include padding in the element's width and height */
-  
+  max-width: 100%;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+
+  &.fade-up {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   .title {
     font-size: 3rem;
-    font-family: "Wallpoet";
+    font-family: 'Wallpoet';
     font-weight: 400;
     letter-spacing: 0.5rem;
     color: #ffffff;
@@ -60,13 +100,14 @@ const Container = styled.div`
 
   .para {
     color: #e0e0e0;
-    width: 90%;
-    max-width: 900px;
+    width: 95%;
+    max-width: 1000px;
     margin: 1rem auto;
     padding: 1rem;
     letter-spacing: 0.1rem;
     text-align: center;
-    font-family: "Merienda", cursive;
+    font-family: 'Merienda', cursive;
+
     p {
       font-size: 1.5rem;
       text-align: justify;
@@ -87,41 +128,42 @@ const Container = styled.div`
   }
 
   .button {
-    margin-top: 2rem;
-    text-align: center;
+  margin-top: 2rem;
+  text-align: center;
 
-    a {
-      display: inline-block;
-      padding: 12px 24px;
-      background-color: #0066cc; /* Blue background for the button */
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 1.2rem;
-      border-radius: 8px;
-      transition: background-color 0.3s, transform 0.3s;
-      box-shadow: 0 0 10px rgba(0, 102, 204, 0.5);
+  a {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: transparent; /* Dark background */
+    color: #ffffff; /* White text */
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7); /* White shadow for effect */
+    &:hover {
+      background-color: transparent; /* Slightly lighter background on hover */
+      transform: scale(1.1) rotate(10deg); /* Scale and rotate on hover */
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.7); /* White shadow for effect */
+    }
 
-      &:hover {
-        background-color: #005bb5;
-        transform: scale(1.05);
-      }
+    @media screen and (max-width: 1024px) {
+      font-size: 1.1rem;
+      padding: 10px 20px;
+    }
 
-      @media screen and (max-width: 1024px) {
-        font-size: 1.1rem;
-        padding: 10px 20px;
-      }
+    @media screen and (max-width: 768px) {
+      font-size: 1rem;
+      padding: 8px 16px;
+    }
 
-      @media screen and (max-width: 768px) {
-        font-size: 1rem;
-        padding: 8px 16px;
-      }
-
-      @media screen and (max-width: 480px) {
-        font-size: 0.9rem;
-        padding: 6px 12px;
-      }
+    @media screen and (max-width: 480px) {
+      font-size: 0.9rem;
+      padding: 6px 12px;
     }
   }
+}
 
   .social-media {
     margin-top: 2rem;
@@ -135,7 +177,7 @@ const Container = styled.div`
       font-size: 2rem;
 
       &:hover {
-        color: #e1306c; /* Instagram brand color */
+        color: #e1306c;
         transform: scale(1.2);
       }
 

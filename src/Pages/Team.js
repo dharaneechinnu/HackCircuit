@@ -1,83 +1,82 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { FaLinkedin } from 'react-icons/fa'; // LinkedIn icon from react-icons
-import Nav from './Nav';
 import bg from '../Assets/bg6.png'; // Replace with the correct image paths
 
 const Team = () => {
+  const sectionRefs = useRef([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('fade-up');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    sectionRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <>
-    
-      <TeamContainer id="team">
-        <MainTitle>OUR TEAM</MainTitle>
+    <TeamContainer id="team">
+      <MainTitle>OUR TEAM</MainTitle>
 
-        {/* Student Coordinator Section */}
-        <Section>
-          <SectionTitle>Student Coordinator</SectionTitle>
-          <MembersContainer>
-            <MemberCard>
-              <MemberPhoto src={bg} alt="Member 1" />
-              <MemberName>Person 1</MemberName>
+      {/* Student Coordinator Section */}
+      <Section ref={(el) => (sectionRefs.current[0] = el)}>
+        <SectionTitle>Student Coordinator</SectionTitle>
+        <MembersContainer>
+          {[1, 2, 3].map((index) => (
+            <MemberCard
+              key={index}
+              ref={(el) => (sectionRefs.current[index] = el)}
+            >
+              <MemberPhoto src={bg} alt={`Member ${index}`} />
+              <MemberName>Person {index}</MemberName>
               <MemberPosition>Student Coordinator</MemberPosition>
-              <LinkedInIcon href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+              <LinkedInIcon
+                href="https://www.linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FaLinkedin />
               </LinkedInIcon>
             </MemberCard>
+          ))}
+        </MembersContainer>
+      </Section>
 
-            <MemberCard>
-              <MemberPhoto src={bg} alt="Member 2" />
-              <MemberName>Person 2</MemberName>
-              <MemberPosition>Student Coordinator</MemberPosition>
-              <LinkedInIcon href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
-                <FaLinkedin />
-              </LinkedInIcon>
-            </MemberCard>
-
-            <MemberCard>
-              <MemberPhoto src={bg} alt="Member 3" />
-              <MemberName>Person 3</MemberName>
-              <MemberPosition>Student Coordinator</MemberPosition>
-              <LinkedInIcon href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
-                <FaLinkedin />
-              </LinkedInIcon>
-            </MemberCard>
-          </MembersContainer>
-        </Section>
-
-        {/* Design Team Section */}
-        <Section>
-          <SectionTitle>Design Team</SectionTitle>
-          <MembersContainer>
-            <MemberCard>
-              <MemberPhoto src={bg} alt="Designer 1" />
-              <MemberName>Designer 1</MemberName>
+      {/* Design Team Section */}
+      <Section ref={(el) => (sectionRefs.current[4] = el)}>
+        <SectionTitle>Design Team</SectionTitle>
+        <MembersContainer>
+          {[4, 5, 6].map((index) => (
+            <MemberCard
+              key={index}
+              ref={(el) => (sectionRefs.current[index + 3] = el)}
+            >
+              <MemberPhoto src={bg} alt={`Designer ${index - 3}`} />
+              <MemberName>Designer {index - 3}</MemberName>
               <MemberPosition>Design Team</MemberPosition>
-              <LinkedInIcon href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+              <LinkedInIcon
+                href="https://www.linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FaLinkedin />
               </LinkedInIcon>
             </MemberCard>
-
-            <MemberCard>
-              <MemberPhoto src={bg} alt="Designer 2" />
-              <MemberName>Designer 2</MemberName>
-              <MemberPosition>Design Team</MemberPosition>
-              <LinkedInIcon href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
-                <FaLinkedin />
-              </LinkedInIcon>
-            </MemberCard>
-
-            <MemberCard>
-              <MemberPhoto src={bg} alt="Designer 3" />
-              <MemberName>Designer 3</MemberName>
-              <MemberPosition>Design Team</MemberPosition>
-              <LinkedInIcon href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
-                <FaLinkedin />
-              </LinkedInIcon>
-            </MemberCard>
-          </MembersContainer>
-        </Section>
-      </TeamContainer>
-    </>
+          ))}
+        </MembersContainer>
+      </Section>
+    </TeamContainer>
   );
 };
 
@@ -105,6 +104,14 @@ const MainTitle = styled.h1`
 const Section = styled.div`
   margin-bottom: 3rem;
   width: 100%;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+
+  &.fade-up {
+    opacity: 1;
+    transform: translateY(0);
+  }
 `;
 
 const SectionTitle = styled.h2`
@@ -133,6 +140,14 @@ const MemberCard = styled.div`
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+
+  &.fade-up {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
   @media (min-width: 600px) {
     width: calc(50% - 20px);

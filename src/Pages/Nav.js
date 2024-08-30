@@ -174,7 +174,8 @@ const NavbarLinks = styled.div`
 const NavbarLink = styled.a`
   color: white;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
   cursor: pointer;
 
   &:hover {
@@ -186,7 +187,7 @@ const ToggleButton = styled.button`
   background: none;
   border: none;
   color: white;
-  font-size: 1rem;
+  font-size: 1.5rem;
   cursor: pointer;
   margin-right: 30px;
   display: none;

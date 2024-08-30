@@ -33,11 +33,9 @@ const Pages = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
-
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <Container>
       <Nav />
       <Content>
@@ -46,7 +44,7 @@ const Pages = () => {
         <Sponsor />
         <Event />
       </Content>
-      <Team/>
+      <Team />
       <Footer />
     </Container>
   );

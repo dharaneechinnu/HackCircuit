@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Lenis from '@studio-freight/lenis'; // Ensure Lenis is installed
 import intro from '../Assets/bg6.png'; // Ensure the path is correct
 
 const Main = () => {
   const containerRef = useRef(null);
+  const [scrollY, setScrollY] = useState(0); // State to track scroll position
 
   useEffect(() => {
     // Initialize Lenis for smooth scrolling
@@ -12,6 +13,11 @@ const Main = () => {
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing function
       smoothWheel: true,
+    });
+
+    // Update scroll position on each Lenis frame
+    lenis.on('scroll', ({ scroll }) => {
+      setScrollY(scroll);
     });
 
     // Start Lenis scroll loop
@@ -27,18 +33,22 @@ const Main = () => {
   }, []);
 
   return (
-    <Container id='home' ref={containerRef}>
-      <BackgroundImage src={intro} alt="Bg" />
+    <Container id="home" ref={containerRef}>
+      <BackgroundImage 
+        src={intro} 
+        alt="Background"
+        style={{ transform: `translateY(${scrollY * 0.5}px)` }} 
+      />
       <div className="title">
-        <AnimatedText>
+        <AnimatedText style={{ transform: `translateY(${scrollY * 0.1}px)` }}>
           {'HACKCIRCUIT'.split('').map((letter, index) => (
             <Letter key={index} delay={index * 0.1}>
               {letter}
             </Letter>
           ))}
         </AnimatedText>
-        <AnimatedCode>Hack.code.build</AnimatedCode>
-        <AnimatedDate>AUGUST 30</AnimatedDate>
+        <AnimatedCode style={{ transform: `translateY(${scrollY * 0.15}px)` }}>Hack.code.build</AnimatedCode>
+        <AnimatedDate style={{ transform: `translateY(${scrollY * 0.2}px)` }}>AUGUST 30</AnimatedDate>
       </div>
     </Container>
   );
@@ -50,14 +60,14 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100vh; /* Increased height to create space for scrolling */
   overflow: hidden;
   color: #fff;
   text-align: center;
   padding: 1rem;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -81,10 +91,10 @@ const BackgroundImage = styled.img`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 150%; /* Slightly larger height for smoother flow effect */
   object-fit: cover;
-  background-position: center;
   z-index: -1; /* Keep the image behind everything else */
+  will-change: transform; /* Optimize performance */
 `;
 
 // Keyframes for fade-in and slide-up animation
@@ -104,9 +114,11 @@ const AnimatedText = styled.div`
   font-size: 8rem;
   display: flex;
   justify-content: center;
-  font-family: "Wallpoet", sans-serif;
+  font-family: 'Wallpoet', sans-serif;
   padding: 20px;
   margin-top: 1rem;
+  will-change: transform; /* Optimize performance */
+
   @media (max-width: 1024px) {
     font-size: 6rem;
   }
@@ -146,7 +158,7 @@ const Letter = styled.span`
 `;
 
 const AnimatedCode = styled.div`
-  font-family: "Wallpoet", sans-serif;
+  font-family: 'Wallpoet', sans-serif;
   font-weight: 400;
   text-transform: uppercase;
   font-size: 3rem;
@@ -154,6 +166,7 @@ const AnimatedCode = styled.div`
   animation: ${fadeInSlideUp} 2s ease-in-out;
   font-style: normal;
   margin: 1rem 0; /* Adds spacing between the title and code */
+  will-change: transform; /* Optimize performance */
 
   @media (max-width: 1024px) {
     font-size: 2.5rem;
@@ -178,13 +191,14 @@ const AnimatedCode = styled.div`
 
 // Styled component for the date text
 const AnimatedDate = styled.div`
-  font-family: "Wallpoet", sans-serif;
+  font-family: 'Wallpoet', sans-serif;
   font-weight: 400;
   font-size: 3rem;
   letter-spacing: 0.3rem;
   font-style: normal;
   animation: ${fadeInSlideUp} 2s ease-in-out;
   margin-top: 1rem; /* Adds space above the date */
+  will-change: transform; /* Optimize performance */
 
   @media (max-width: 1024px) {
     font-size: 2.5rem;

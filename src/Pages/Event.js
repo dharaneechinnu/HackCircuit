@@ -150,8 +150,9 @@ const EventTitle = styled.h1`
 
 const EventDescription = styled.div`
   font-family: "Merienda", cursive;
+  font-size: 1.5rem;
   width: 80%;
-  max-width: 700px;
+  max-width: 1000px;
   text-align: justify;
   line-height: 1.6;
   color: #e0e0e0;
@@ -161,7 +162,7 @@ const EventDescription = styled.div`
   }
 
   @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: 1.5rem;
     width: 90%;
   }
 
